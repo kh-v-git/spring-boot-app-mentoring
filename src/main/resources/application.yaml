@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    active: local
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    database-platform: org.hibernate.dialect.H2Dialect
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: your-id
+            client-secret: your-secret
+application:
+  web:
+    app:
+      jwtCookieName: demo-app-jwt
+      jwtSecret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      jwtExpirationMs: 86400000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: config/local.yaml
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: config/dev.yaml
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import: config/prod.yaml
+---
+spring:
+  config:
+    activate:
+      on-profile: stg
+    import: config/stg.yaml

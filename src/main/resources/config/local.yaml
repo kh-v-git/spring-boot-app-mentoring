@@ -1,0 +1,33 @@
+
+logging:
+  level:
+    org.springframework.jdbc.datasource.init.ScriptUtils: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # expose all endpoints
+
+spring:
+  sql:
+    init:
+      data-locations: classpath:/db/h2_data/data.sql
+      schema-locations: classpath:/db/h2_data/schema.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2-ui
+  datasource:
+    url: jdbc:h2:mem:app_db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    user: sa
+    password: sa
+    url: jdbc:h2:mem:app_db
+    schemas: app_db
